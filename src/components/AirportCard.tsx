@@ -1,5 +1,10 @@
 import * as React from "react";
+import { IAirport } from "../models/models";
 
-export function AirportCard() {
-  return <div>card</div>;
+interface AirportCardProps {
+  airport: IAirport;
+}
+
+export function AirportCard({ airport }: AirportCardProps) {
+  return <div>{airport.name}</div>;
 }

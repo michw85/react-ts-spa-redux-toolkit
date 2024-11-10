@@ -4,11 +4,11 @@ import { AirportFilter } from "../components/AirportFilter";
 import { AirportCard } from "../components/AirportCard";
 import { useDispatch } from "react-redux";
 import { fetchAirports } from "../store/actions/airportActions";
-import { useAppDespatch } from "../hook/redux";
+import { useAppDespatch, useAppSelector } from "../hook/redux";
 
 export function MainPage() {
   const dispatch = useAppDespatch();
-
+  const { error, loading, airports } = useAppSelector((state) => state.airport);
   React.useEffect(() => {
     dispatch(fetchAirports());
   }, []);
@@ -17,8 +17,12 @@ export function MainPage() {
       <AirportSearch />
 
       <AirportFilter />
+      {loading && <p className="text-center text-lg">Loading...</p>}
+      {error && <p className="text-center text-lg text-red-600">{error}</p>}
 
-      <AirportCard />
+      {airports.map((airports) => (
+        <AirportCard key={airports.id} airport={airports} />
+      ))}
     </div>
   );
 }
