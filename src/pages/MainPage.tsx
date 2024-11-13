@@ -14,15 +14,15 @@ export function MainPage() {
   }, []);
   return (
     <div className="comtainer mx-auto max-w-[760px] pt-5">
-      <AirportSearch />
-
-      <AirportFilter />
+      {/* <AirportSearch /> */}
+      {/* <AirportFilter />
       {loading && <p className="text-center text-lg">Loading...</p>}
       {error && <p className="text-center text-lg text-red-600">{error}</p>}
 
       {airports.map((airports) => (
         <AirportCard key={airports.id} airport={airports} />
-      ))}
+      ))} */}
+      Data
     </div>
   );
 }
