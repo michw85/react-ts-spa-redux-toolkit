@@ -1,17 +1,23 @@
 import * as React from "react";
-import { AirportSearch } from "../components/AirportSearch";
-import { AirportFilter } from "../components/AirportFilter";
-import { AirportCard } from "../components/AirportCard";
 import { useDispatch } from "react-redux";
 import { fetchAirports } from "../store/actions/airportActions";
-import { useAppDespatch, useAppSelector } from "../hook/redux";
+import { useAppDispatch, useAppSelector } from "../hook/redux";
+
+const ITEMS_PER_PAGE = 50;
 
 export function MainPage() {
-  const dispatch = useAppDespatch();
-  const { error, loading, airports } = useAppSelector((state) => state.airport);
+  const dispatch = useAppDispatch();
+  const page = React.useRef(1);
+  const { error, loading, airports } = useAppSelector(
+    (state) => state.airportReducer
+  );
   React.useEffect(() => {
-    dispatch(fetchAirports());
+    dispatch(fetchAirports(page.current, ITEMS_PER_PAGE));
   }, []);
+  // const pageChangeHandler = ({ selected }: { selected: number }) => {
+  //   page.current = selected + 1;
+  //   dispatch(fetchAirports(page.current, ITEMS_PER_PAGE));
+  // };
   return (
     <div className="comtainer mx-auto max-w-[760px] pt-5">
       {/* <AirportSearch /> */}
